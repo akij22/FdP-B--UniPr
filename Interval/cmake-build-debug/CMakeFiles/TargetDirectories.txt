@@ -1,0 +1,3 @@
+/Users/achillerossi/Documents/UNIPR/C++/Interval/cmake-build-debug/CMakeFiles/Interval.dir
+/Users/achillerossi/Documents/UNIPR/C++/Interval/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/achillerossi/Documents/UNIPR/C++/Interval/cmake-build-debug/CMakeFiles/rebuild_cache.dir
