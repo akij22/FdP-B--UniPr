@@ -23,7 +23,14 @@ public:
     }
 
     MultiSet(const MultiSet& other) {
-        // TODO
+        this->dim = other.dim;
+        this->top = 0;
+
+        this->a = new T[other.dim];
+
+        for (int i = 0; i < other.dim; i++) {
+            this->add(other.a[i]);
+        }
 
 
     }
@@ -82,20 +89,14 @@ public:
             throw invalid_argument("Elemento non presente nell'insieme");
         }
 
-        if (x == this->a[dim]) {
-            this->dim--;
-            this->top--;
-            return;
-        }
 
         for (int i = 0; i < this->dim; i++) {
             if (this->a[i] == x) {
                 for (int j = i; j < dim - 1; j++) {
                     this->a[j] = this->a[j + 1];
                 }
-
                 this->dim--;
-                i = 0;
+                i = 1;
             }
 
         }
@@ -142,6 +143,8 @@ public:
         this->top = 0;
         this->dim = other.dim;
 
+        this->a = new T[other.dim];
+
         for (int i = 0; i < other.dim; i++) {
             this->add(other.a[i]);
         }
@@ -165,6 +168,8 @@ int main() {
     MultiSet<int> m2;
     MultiSet<int> final;
 
+    MultiSet<int> sum;
+
     MultiSet<string> stringSet;
 
     stringSet.add("ciao");
@@ -181,15 +186,31 @@ int main() {
     m2.add(15);
     m2.add(38);
 
+    MultiSet<int> copy(m1);
+
 
 
     cout << m1;
 
+    cout << "COPIA: ";
+    cout << copy;
+
     cout << m2;
 
     final = m1;
+
+    try {
+        final.remove(10);
+    } catch (invalid_argument i) {
+        cout << i.what() << endl;
+    }
+    cout << "TEST OPERATORE DI ASSEGNAMENTO: ";
     cout << final;
 
+
+    sum = m1 + m2;
+
+    cout << "SOMMA: " << sum;
     cout << stringSet;
 
     return 0;
