@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/achillerossi/Documents/UNIPR/C++/Pair/cmake-build-debug"
+			"value" : "/Users/achillerossi/Documents/UNIPR/C++/Programmazione B/Pair/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -479,7 +479,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/achillerossi/Documents/UNIPR/C++/Pair/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/Users/achillerossi/Documents/UNIPR/C++/Programmazione B/Pair/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -539,7 +539,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/Users/achillerossi/Documents/UNIPR/C++/Pair"
+			"value" : "/Users/achillerossi/Documents/UNIPR/C++/Programmazione B/Pair"
 		},
 		{
 			"name" : "CMAKE_INSTALL_NAME_TOOL",
@@ -1127,7 +1127,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/achillerossi/Documents/UNIPR/C++/Pair/cmake-build-debug"
+			"value" : "/Users/achillerossi/Documents/UNIPR/C++/Programmazione B/Pair/cmake-build-debug"
 		},
 		{
 			"name" : "Pair_IS_TOP_LEVEL",
@@ -1151,7 +1151,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/Users/achillerossi/Documents/UNIPR/C++/Pair"
+			"value" : "/Users/achillerossi/Documents/UNIPR/C++/Programmazione B/Pair"
 		}
 	],
 	"kind" : "cache",

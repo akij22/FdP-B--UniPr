@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/Users/achillerossi/Documents/UNIPR/C++/Stack/cmake-build-debug",
-		"source" : "/Users/achillerossi/Documents/UNIPR/C++/Stack"
+		"build" : "/Users/achillerossi/Documents/UNIPR/C++/Programmazione B/Stack/cmake-build-debug",
+		"source" : "/Users/achillerossi/Documents/UNIPR/C++/Programmazione B/Stack"
 	},
 	"version" : 
 	{

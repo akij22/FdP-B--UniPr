@@ -1,215 +1,151 @@
 #include <iostream>
 using namespace std;
 
-// CLASSE PAIR
-
-
-template<typename F, typename S>
-
+template<class K, class V>
 class Pair {
 private:
-    F first;
-    S second;
-
+    K first;
+    V second;
 public:
 
-    F getKey() {
+    K getKey() const {
         return this->first;
     }
 
-    S getSecond() {
+    V& getValue() {
         return this->second;
     }
 
-
-    // Set del value, utilizzato per l'array dinamico (container) in Map
-    void setValue(S s) {
-        this->second = s;
+    void setValue(V v) {
+        this->second = v;
     }
 
-    // Set della key, utilizzato per l'array dinamico (container) in Map
-    void setKey(F x) {
-        this->first = x;
+    void setKey(K k) {
+        this->first = k;
     }
 };
 
-
-template <typename F, typename S>
-istream& operator>> (istream& in, Pair<F, S>& p1) {
-
-    F chiave;
-    S value;
-
-    cout << "Inserisci chiave: ";
-
-    in >> chiave;
-
-    cout << "Inserisci valore: ";
-
-    in >> value;
-
-    if (chiave < 0)
-        throw invalid_argument("Chiave non puo' essere negativa");
-
-    p1.setKey(chiave);
-
-    p1.setValue(value);
-
-    return in;
-}
-
-
-
-// CLASSE MAP
-
-template<typename F, typename S>
+template<class K, class V>
 class Map {
 private:
-
-    // Array dinamico di coppie interi / stringhe, preso dalla class Pair
-    Pair<F, S>* container;
+    Pair<K, V>* container;
     int dim;
-    int cursor; // Numero di elementi dentro il container, prossima cella in cui inserire il prossimo Pair
+    int curs;
+
+    void enlarge() {
+        Pair<K,V>* new_container = new Pair<K,V>[dim * 2];
+        for (int i = 0; i < this->curs; i++)
+            new_container[i] = this->container[i];
+        delete [] this->container;
+        this->container = new_container;
+        this->dim = dim * 2;
+    }
 
 public:
 
-    Map() {
-        this->container = new Pair<F, S>[5];
-
+    Map<K, V>() {
+        this->container = new Pair<K, V>[5];
         this->dim = 5;
-        this->cursor = 0;
-
+        this->curs = 0;
     }
 
-    Map(Pair* p1, int dim) {
-
-        this->container = p1;
-
-        if (dim < 0)
-            throw invalid_argument("Dimensione non puo' essere negativa");
-
-        this->dim = dim;
-
+    Map<K, V>(const Map<K, V>& other) {
+        this->dim = other.dim;
+        this->curs = other.curs;
+        this->container = new Pair<K, V>[dim];
+        for (int i = 0; i < curs; i++)
+            this->container[i] = other.container[i];
     }
 
-    ~Map() {
-
-    }
-
-    Map(const Map& other) {
-
-    }
-
-
-    void update(int key, string value) {
-        if (!contains(key)) {
-            throw invalid_argument("Chiave non presente nel Map");
-        }
-
-        for (int i = 0; i < cursor; i++) {
-            if (key == this->container[i].getKey()) {
-
-                this->container[i].setValue(value);
-            }
-        }
-    }
-
-
-    void add(int key, string value) {
-
-        if (contains(key)) {
-            throw invalid_argument("Chiave gia' presente");
-        }
-
-        this->container[cursor].setKey(key);
-        this->container[cursor].setValue(value);
-
-        this->cursor++;
-    }
-
-    bool contains(int key) {
-
-        for (int i = 0; i < cursor; i++) {
-            if (key == this->container[i].getKey())
-                return true;
-        }
-
-        return false;
-
-    }
-
-    int getDim() {
-        return this->dim;
-    }
-
-    void print(ostream& out) const {
-        for (int i = 0; i < this->dim; i++) {
-            out << this->container[i].getKey() << " --> " << this->container[i].getSecond() << endl;
-        }
-    }
-
-    Map& operator=(const Map& m1) {
-
-        if (this == &m1)
-            return *this;
-
+    ~Map<K, V>() {
         delete [] this->container;
+    }
 
-        this->container = new Pair;
+    const Map<K,V>& operator=(const Map<K, V>& other) {
+        if (this != &other) {
 
-        this->dim = m1.dim;
-
-        for (int i = 0; i < this->dim; i++) {
-            this->add(m1.container[i].getKey(), m1.container[i].getSecond());
+            delete [] this->container;
+            this->dim = other.dim;
+            this->curs = other.curs;
+            this->container = new Pair<K, V>[dim];
+            for (int i = 0; i < curs; i++)
+                this->container[i] = other.container[i];
         }
-
         return *this;
     }
 
-    void printContainerAddress() {
-        cout << &(this->container) << endl;
+    void update(K k, V v) {
+        if (!contains(k))
+            throw invalid_argument("Key not present");
+        for (int i = 0; i < curs; i++)
+            if (this->container[i].getKey() == k)
+                this->container[i].setValue(v);
     }
 
+    void add(K k, V v) {
+        if (contains(k))
+            throw invalid_argument("Key-value pair already present");
+        if (curs == dim)
+            enlarge();
 
+        this->container[curs].setKey(k);
+        this->container[curs].setValue(v);
+        this->curs++;
+    }
+
+    bool contains(K k) {
+        for (int i = 0; i < curs; i++)
+            if (this->container[i].getKey() == k)
+                return true;
+        return false;
+    }
+
+    bool isEmpty() const {
+        return this->curs == 0;
+    }
+
+    void remove(K k) {
+        for (int i = 0; i < curs; i++)
+            if (this->container[i].getKey() == k) {
+                for (int j = i; j < curs - 1; j++)
+                    this->container[j] = this->container[j + 1];
+                curs--;
+            }
+    }
+
+    ostream& print(ostream& dest) const {
+        if (isEmpty())
+            cout << "Empty map" << endl;
+        else
+            for (int i = 0; i < this->curs; i++)
+                dest << "(" << this->container[i].getKey() << ", " << this->container[i].getValue() << ")" << endl;
+        return dest;
+    }
+
+    V& operator[](K k) {
+        for (int i = 0; i < this->curs; i++)
+            if (this->container[i].getKey() == k)
+                return this->container[i].getValue();
+        throw out_of_range("Key not present");
+    }
 };
 
-ostream& operator<<(ostream& out, const   Map& m1) {
-
-    m1.print(out);
-
-    return out;
+template<class K, class V>
+ostream& operator<<(ostream& dest, const Map<K, V>& map) {
+    return map.print(dest);
 }
 
-
-
-
-
 int main() {
+    Map<int, string> map;
+    cout << map;
+    map.add(1, "hello");
+    map.add(2, "world");
+    map.add(3, "bye");
+    cout << map;
 
-    Pair p1;
-
-    Map m1;
-    m1.add(1, "Ciao");
-    m1.add(100, "cento");
-    m1.add(2, "Lesgoski");
-    m1.add(54, "Random");
-    m1.add(22, "Yessir");
-
-    Map m2;
-
-    m2 = m1;
-
-    cout << m1;
-    cout << m2;
-
-    m1.printContainerAddress();
-    m2.printContainerAddress();
-
-
-
-    // cin >> p1;
-
-
+    map.remove(4);
+    map.remove(2);
+    cout << map;
 
     return 0;
 }

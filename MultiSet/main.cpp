@@ -35,6 +35,9 @@ public:
 
     }
 
+
+    // Funzione per aumentare la dimensione dell'array dinamico,
+    // in caso non ci sia piu' spazio per nuovi elementi
     void enLarge() {
 
         // cout << "Allargo dimensione dell'array..." << endl;
