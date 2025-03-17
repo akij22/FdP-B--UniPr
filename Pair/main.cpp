@@ -1,4 +1,5 @@
 #include <iostream>
+#include <set>
 using namespace std;
 
 template<class K, class V>
@@ -8,11 +9,19 @@ private:
     V second;
 public:
 
+
+    Pair<K ,V>(K first, V second) {
+
+        this->first = first;
+        this->second = second;
+    }
+
+
     K getKey() const {
         return this->first;
     }
 
-    V& getValue() {
+    V& getValue() const {
         return this->second;
     }
 
@@ -23,129 +32,104 @@ public:
     void setKey(K k) {
         this->first = k;
     }
+
+    // Necessario, in quanto la insert di SET effettua un confronto ad un certo punto del codice
+    bool operator<(const Pair<K, V>& other) const {
+        return this->first < other.first;
+    }
 };
+
+
 
 template<class K, class V>
 class Map {
 private:
-    Pair<K, V>* container;
-    int dim;
-    int curs;
 
-    void enlarge() {
-        Pair<K,V>* new_container = new Pair<K,V>[dim * 2];
-        for (int i = 0; i < this->curs; i++)
-            new_container[i] = this->container[i];
-        delete [] this->container;
-        this->container = new_container;
-        this->dim = dim * 2;
-    }
+    // Utilizzo un set per implementare Map
+    // Devo avere chiavi univoche
+    vector<Pair<K, V>> container;
 
 public:
+    Map<K, V>(){}
 
-    Map<K, V>() {
-        this->container = new Pair<K, V>[5];
-        this->dim = 5;
-        this->curs = 0;
-    }
+    void add(const K key, const V value) {
 
-    Map<K, V>(const Map<K, V>& other) {
-        this->dim = other.dim;
-        this->curs = other.curs;
-        this->container = new Pair<K, V>[dim];
-        for (int i = 0; i < curs; i++)
-            this->container[i] = other.container[i];
-    }
+        if (keys().count(key) != 0) {
 
-    ~Map<K, V>() {
-        delete [] this->container;
-    }
+            // utilizzando vector, posso andare a returnare l'iterator per reference
+            for (Pair<K, V>& p : this->container) {
 
-    const Map<K,V>& operator=(const Map<K, V>& other) {
-        if (this != &other) {
-
-            delete [] this->container;
-            this->dim = other.dim;
-            this->curs = other.curs;
-            this->container = new Pair<K, V>[dim];
-            for (int i = 0; i < curs; i++)
-                this->container[i] = other.container[i];
-        }
-        return *this;
-    }
-
-    void update(K k, V v) {
-        if (!contains(k))
-            throw invalid_argument("Key not present");
-        for (int i = 0; i < curs; i++)
-            if (this->container[i].getKey() == k)
-                this->container[i].setValue(v);
-    }
-
-    void add(K k, V v) {
-        if (contains(k))
-            throw invalid_argument("Key-value pair already present");
-        if (curs == dim)
-            enlarge();
-
-        this->container[curs].setKey(k);
-        this->container[curs].setValue(v);
-        this->curs++;
-    }
-
-    bool contains(K k) {
-        for (int i = 0; i < curs; i++)
-            if (this->container[i].getKey() == k)
-                return true;
-        return false;
-    }
-
-    bool isEmpty() const {
-        return this->curs == 0;
-    }
-
-    void remove(K k) {
-        for (int i = 0; i < curs; i++)
-            if (this->container[i].getKey() == k) {
-                for (int j = i; j < curs - 1; j++)
-                    this->container[j] = this->container[j + 1];
-                curs--;
+                if (p.getKey() == key)
+                    p.setValue(value);
             }
+
+
+        } else {
+
+            // Chiave non ancora presente nel mio set, quindi la posso aggiungere per la prima volta
+            this->container.push_back(Pair<K, V>(key, value));
+        }
+
     }
 
-    ostream& print(ostream& dest) const {
-        if (isEmpty())
-            cout << "Empty map" << endl;
-        else
-            for (int i = 0; i < this->curs; i++)
-                dest << "(" << this->container[i].getKey() << ", " << this->container[i].getValue() << ")" << endl;
-        return dest;
+
+    // Returna tutti i VALORI (<V>) della Map, senza considerare la rispettiva chiave
+    set<V>values() {
+
+        set<V> final;
+
+        for (Pair<K, V> e : this->container) {
+            // Inserisco in final solamente il valore del container (rinominato e nel FOREACH)
+            final.insert(e.getValue());
+        }
+
+        return final;
+
+
     }
 
-    V& operator[](K k) {
-        for (int i = 0; i < this->curs; i++)
-            if (this->container[i].getKey() == k)
-                return this->container[i].getValue();
-        throw out_of_range("Key not present");
+    set<K> keys() {
+        set<K> final;
+
+        for (Pair<K, V> p : this->container){
+            final.insert(p.getKey());
+        }
+
+        return final;
+    }
+
+    void updateAllValues(V v) {
+        for (Pair <K, V> p : this->container) {
+            p.setValue(v);
+        }
+    }
+
+
+    void print() const{
+
+        for (Pair<K, V> p : this->container) {
+            cout << p.getKey() << " " << p.getValue() << endl;
+        }
     }
 };
 
-template<class K, class V>
-ostream& operator<<(ostream& dest, const Map<K, V>& map) {
-    return map.print(dest);
-}
+// template<class K, class V>
+// ostream& operator<<(ostream& out, const Map<Pair<K, V>>& m1) {
+
+// }
+
+
 
 int main() {
-    Map<int, string> map;
-    cout << map;
-    map.add(1, "hello");
-    map.add(2, "world");
-    map.add(3, "bye");
-    cout << map;
 
-    map.remove(4);
-    map.remove(2);
-    cout << map;
+    Map<int, int> m1;
 
-    return 0;
+    m1.add(1, 10);
+    m1.add(2, 20);
+    m1.add(3, 30);
+
+    // Check dell' effettiva modifica
+    m1.add(1, 55);
+
+    m1.print();
 }
