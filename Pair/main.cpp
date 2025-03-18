@@ -17,11 +17,11 @@ public:
     }
 
 
-    K getKey() const {
+    const K getKey() const {
         return this->first;
     }
 
-    V& getValue() const {
+    const V& getValue() const {
         return this->second;
     }
 
@@ -105,18 +105,23 @@ public:
     }
 
 
-    void print() const{
+    void print(ostream& out) const {
 
         for (Pair<K, V> p : this->container) {
             cout << p.getKey() << " " << p.getValue() << endl;
         }
+
+        cout << endl;
     }
 };
 
-// template<class K, class V>
-// ostream& operator<<(ostream& out, const Map<Pair<K, V>>& m1) {
+template<class K, class V>
+ostream& operator<<(ostream& out, const Map<K, V>& m1) {
 
-// }
+    m1.print(out);
+    return out;
+
+}
 
 
 
@@ -131,5 +136,7 @@ int main() {
     // Check dell' effettiva modifica
     m1.add(1, 55);
 
-    m1.print();
+    cout << m1;
+
+
 }
