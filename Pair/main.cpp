@@ -108,10 +108,10 @@ public:
     void print(ostream& out) const {
 
         for (Pair<K, V> p : this->container) {
-            cout << p.getKey() << " " << p.getValue() << endl;
+            out << p.getKey() << " " << p.getValue() << endl;
         }
 
-        cout << endl;
+        out << endl;
     }
 };
 

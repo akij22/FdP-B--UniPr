@@ -1,0 +1,3 @@
+/Users/achillerossi/Documents/UNIPR/C++/Programmazione B/SistemaUniversitario/cmake-build-debug/CMakeFiles/SistemaUniversitario.dir
+/Users/achillerossi/Documents/UNIPR/C++/Programmazione B/SistemaUniversitario/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/achillerossi/Documents/UNIPR/C++/Programmazione B/SistemaUniversitario/cmake-build-debug/CMakeFiles/rebuild_cache.dir

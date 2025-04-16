@@ -51,7 +51,7 @@ build cmake_object_order_depends_target_MultiSet: phony || .
 
 build CMakeFiles/MultiSet.dir/main.cpp.o: CXX_COMPILER__MultiSet_unscanned_Debug /Users/achillerossi/Documents/UNIPR/C++/Programmazione$ B/MultiSet/main.cpp || cmake_object_order_depends_target_MultiSet
   DEP_FILE = CMakeFiles/MultiSet.dir/main.cpp.o.d
-  FLAGS = -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/MultiSet.dir
   OBJECT_FILE_DIR = CMakeFiles/MultiSet.dir
   TARGET_COMPILE_PDB = CMakeFiles/MultiSet.dir/
@@ -66,7 +66,7 @@ build CMakeFiles/MultiSet.dir/main.cpp.o: CXX_COMPILER__MultiSet_unscanned_Debug
 # Link the executable MultiSet
 
 build MultiSet: CXX_EXECUTABLE_LINKER__MultiSet_Debug CMakeFiles/MultiSet.dir/main.cpp.o
-  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.2.sdk
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk
   OBJECT_DIR = CMakeFiles/MultiSet.dir
   POST_BUILD = :
   PRE_LINK = :
