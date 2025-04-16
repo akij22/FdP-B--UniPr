@@ -23,6 +23,7 @@ public:
         if (codiceFiscale.length() == 16)
             // Necessiterebbe ulteriori controlli...
             this->codiceFiscale = codiceFiscale;
+        else throw invalid_argument("Codice fiscale non valido!");
     }
 
     string getNome() const {
@@ -39,6 +40,14 @@ public:
 
     void visualizzaDettagli(ostream& out) const {
         out << "Nome: " << this->getNome() << ", cognome: " << this->getCognome() << ", codice fiscale: " << this->getCodiceFiscale() << endl;
+    }
+
+    bool operator==(const Persona& other) {
+        return this->getCodiceFiscale() == other.getCodiceFiscale();
+    }
+
+    bool isDocente() {
+        return false;
     }
 
 };
@@ -151,6 +160,11 @@ public:
 
         out << "Dipartimento: " << this->get_dipartimento() << ", materia insegnata: " << this->get_materia_insegnata() << endl;
     }
+
+
+    bool isDocente() {
+        return true;
+    }
 };
 
 ostream& operator<<(ostream& out, Docente& d) {
@@ -159,6 +173,63 @@ ostream& operator<<(ostream& out, Docente& d) {
     return out;
 }
 
+
+class Universita {
+private:
+    vector<Persona> persone;
+
+public:
+
+    Universita() {
+
+    }
+
+    void aggiungiPersona(Persona& p) {
+        persone.push_back(p);
+    }
+
+    bool isEmpty() {
+        return persone.empty();
+    }
+
+    bool isPresent(Persona& toFind) {
+        for (Persona& p : persone) {
+            if (p == toFind)
+                return true;
+        }
+        return false;
+    }
+
+    void stampa(ostream& out) {
+        for (Persona& elem : persone) {
+            out << elem;
+        }
+    }
+
+    void stampaDocenti(ostream& out) {
+        for (Persona d : persone) {
+            out << d;
+        }
+    }
+
+};
+
 int main() {
+
+    Persona p1("Achille", "Rossi", "Codice fiscale 1");
+    Persona p2("Mario", "Bianchi", "Codice fiscale 2");
+
+    Docente d1("Michael", "Jordan", "Codice fiscale 3", "Chicago Bully", "Golf");
+
+
+    Universita u1;
+
+    u1.aggiungiPersona(p1);
+    u1.aggiungiPersona(p2);
+
+    u1.aggiungiPersona(d1);
+
+    u1.stampa(cout);
+
     return 0;
 }
