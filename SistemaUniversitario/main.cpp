@@ -205,12 +205,7 @@ public:
             out << elem;
         }
     }
-
-    void stampaDocenti(ostream& out) {
-        for (Persona d : persone) {
-            out << d;
-        }
-    }
+    
 
 };
 
