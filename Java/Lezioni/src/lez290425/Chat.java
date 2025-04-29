@@ -23,6 +23,7 @@ public class Chat implements Iterable<Messaggio> {
 		return new ChatIterator(messaggi);
 	}
 	
+	// MAIN
 	public static void main(String[] args) {
 		Chat chat = new Chat();
 		chat.addMessaggio(new Messaggio("Achille", "Ciao"));
