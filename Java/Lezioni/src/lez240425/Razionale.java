@@ -1,4 +1,4 @@
-package lez02;
+package lez240425;
 
 import java.io.InputStream;
 import java.util.Scanner;

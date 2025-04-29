@@ -1,4 +1,4 @@
-package lez02;
+package lez240425;
 
 
 public class DenominatoreUgualeAZeroException extends RuntimeException {

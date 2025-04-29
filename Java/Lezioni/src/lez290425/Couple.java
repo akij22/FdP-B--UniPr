@@ -1,4 +1,4 @@
-package lez02;
+package lez290425;
 
 public class Couple<T extends Comparable<T>> {
 	private T first;

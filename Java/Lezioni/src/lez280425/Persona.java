@@ -1,4 +1,4 @@
-package lez02;
+package lez280425;
 
 public class Persona implements Pesabile {
 
