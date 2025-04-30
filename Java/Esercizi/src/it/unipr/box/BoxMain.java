@@ -18,11 +18,13 @@ public class BoxMain {
 			System.out.println("Elemento 4 non presente");
 		
 		
-		System.out.println(b1.greatest());
+		System.out.println("Elemento piu' grande della collezione: " + b1.greatest());
 		System.out.println("Size: " + b1.getSize());
 		b1.remove(4);
 		
 		
+		System.out.println();
+		System.out.println("Dopo rimozione:");
 		if(b1.isPresent(4))
 			System.out.println("Elemento 4 presente");
 		else
