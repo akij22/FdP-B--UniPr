@@ -22,6 +22,7 @@ public class BoxMain {
 		System.out.println("Size: " + b1.getSize());
 		b1.remove(4);
 		
+		
 		if(b1.isPresent(4))
 			System.out.println("Elemento 4 presente");
 		else
