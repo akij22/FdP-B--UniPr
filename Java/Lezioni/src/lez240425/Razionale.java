@@ -1,6 +1,6 @@
 package lez240425;
 
-import java.io.InputStream;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Razionale implements Cloneable {
@@ -39,16 +39,30 @@ public class Razionale implements Cloneable {
 	}
 	
 	
-	// NON E' IL VERO METODO EQUALS FORNITO A TUTTE LE CLASSI --> non sarebbe da utilizzare
-	public boolean equals(Razionale other) {
-		return this.num == other.num && this.den == other.den;
-	}
 	
 	
-	// Questo è il vero metodo equals messo a disposizione da Java ad ogni classe
-	public boolean equals(Object other) {
-		return false;	
+	// HASHCODE AND EQUALS METHOD
+	
+	@Override
+	public int hashCode() {
+		
+		return Objects.hash(this.num, this.den);
+	
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		
+		Razionale other = (Razionale) obj;
+		return den == other.den && num == other.num;
+	}
+
 	
 	
 	public void read(Scanner in) {
@@ -106,6 +120,8 @@ public class Razionale implements Cloneable {
 		
 		this.den = den;
 	}
+	
+	
 
 	public static void main(String[] args) {
 		
