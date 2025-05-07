@@ -14,7 +14,7 @@ public class Album implements Iterable<Figurina>{
 	
 	
 	
-	public Album(String nomeAlbum) {
+	public Album (String nomeAlbum) {
 		
 		this.nomeAlbum = nomeAlbum;
 		
