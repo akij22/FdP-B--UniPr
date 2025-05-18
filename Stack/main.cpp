@@ -38,7 +38,8 @@ public:
 
 
     // COSTRUTTORE DI COPIA
-    Stack(const Stack& other) {
+    // Parameter: constant reference
+    Stack(const Stack& other)  {
 
         this->cap = other.cap;
         this->top = other.top;
@@ -175,6 +176,11 @@ int main() {
     s3.push(5.1);
 
     cout << s3 << endl;
+
+
+    Stack <int>sFinal(s1);
+    cout << sFinal << endl;
+    cout << s1 << endl;
 
 
 }

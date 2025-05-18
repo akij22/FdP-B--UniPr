@@ -50,7 +50,9 @@ private:
     vector<Pair<K, V>> container;
 
 public:
-    Map<K, V>(){}
+    Map<K, V>() {
+
+    }
 
     void add(const K key, const V value) {
 
@@ -74,7 +76,7 @@ public:
 
 
     // Returna tutti i VALORI (<V>) della Map, senza considerare la rispettiva chiave
-    set<V>values() {
+    set<V> values() {
 
         set<V> final;
 
