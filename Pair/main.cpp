@@ -1,144 +1,178 @@
 #include <iostream>
-#include <set>
+#include <vector>
 using namespace std;
 
-template<class K, class V>
+template<typename K, typename V>
 class Pair {
 private:
-    K first;
-    V second;
+    K key;
+    V value;
 public:
-
-
-    Pair<K ,V>(K first, V second) {
-
-        this->first = first;
-        this->second = second;
+    Pair(K key, V value) {
+        this->key = key;
+        this->value = value;
     }
 
-
-    const K getKey() const {
-        return this->first;
+    K getKey() const {
+        return this->key;
     }
 
-    const V& getValue() const {
-        return this->second;
+    V getValue() const {
+        return this->value;
     }
 
-    void setValue(V v) {
-        this->second = v;
+    void setKey(K key) {
+        this->key = key;
     }
 
-    void setKey(K k) {
-        this->first = k;
-    }
-
-    // Necessario, in quanto la insert di SET effettua un confronto ad un certo punto del codice
-    bool operator<(const Pair<K, V>& other) const {
-        return this->first < other.first;
+    void setValue(V value) {
+        this->value = value;
     }
 };
 
 
 
-template<class K, class V>
+
+template<typename K, typename V>
 class Map {
 private:
-
-    // Utilizzo un set per implementare Map
-    // Devo avere chiavi univoche
-    vector<Pair<K, V>> container;
-
+    vector<Pair<K, V>> elements;
 public:
-    Map<K, V>() {
+
+    Map(){}
+
+
+    bool contains(const K& keyToFind) const {
+
+        for (const Pair<K, V> elem : this->elements) {
+            if (elem.getKey() == keyToFind)
+                return true;
+        }
+
+        return false;
+    }
+
+
+    // Return the index of the key parameter
+    // return -1 if the key is not found in the vector
+    int containsIndex(const K& key) {
+        if (this->isEmpty() || !this->contains(key))
+            return -1;
+
+        for (int i = 0; i < this->elements.capacity(); i++) {
+            if (this->elements[i].getKey() == key)
+                return i;
+        }
+
+        return -1;
 
     }
 
-    void add(const K key, const V value) {
+    int cardinalityElement(const Pair<K, V>& toFind) const {
 
-        if (keys().count(key) != 0) {
+        if (this->isEmpty())
+            return 0;
 
-            // utilizzando vector, posso andare a returnare l'iterator per reference
-            for (Pair<K, V>& p : this->container) {
+        int finalCount = 0;
 
-                if (p.getKey() == key)
-                    p.setValue(value);
+        for (const Pair<K, V>& elem : this->elements) {
+            if (elem.getKey() == toFind.getKey())
+                finalCount++;
+        }
+
+        return finalCount;
+    }
+
+
+    void insert(const K& key, const V& value) {
+
+
+        if (this->contains(key)) {
+            for (Pair<K, V>& elem : this->elements) {
+                if (elem.getKey() == key)
+                    elem.setValue(value);
             }
-
-
-        } else {
-
-            // Chiave non ancora presente nel mio set, quindi la posso aggiungere per la prima volta
-            this->container.push_back(Pair<K, V>(key, value));
+            return;
         }
 
+        Pair<K, V> p1(key, value);
+        this->elements.push_back(p1);
     }
 
+    bool isEmpty() const {
+        return this->elements.empty();
+    }
 
-    // Returna tutti i VALORI (<V>) della Map, senza considerare la rispettiva chiave
-    set<V> values() {
+    void remove(const K& key) {
 
-        set<V> final;
+        int indexToRemove = this->containsIndex(key);
+        if (indexToRemove == -1)
+            throw invalid_argument("Chiave non presente!");
 
-        for (Pair<K, V> e : this->container) {
-            // Inserisco in final solamente il valore del container (rinominato e nel FOREACH)
-            final.insert(e.getValue());
+        this->elements.erase(this->elements.begin() + indexToRemove);
+    }
+
+    void print() {
+        if (this->isEmpty()) {
+            cout << "Mappa vuota..." << endl;
+            return;
         }
 
-        return final;
-
-
-    }
-
-    set<K> keys() {
-        set<K> final;
-
-        for (Pair<K, V> p : this->container){
-            final.insert(p.getKey());
-        }
-
-        return final;
-    }
-
-    void updateAllValues(V v) {
-        for (Pair <K, V> p : this->container) {
-            p.setValue(v);
+        for (Pair<K, V> elem : this->elements) {
+            cout << elem.getKey() << " : " << elem.getValue() << endl;
         }
     }
 
+    bool operator==(const Map& other) {
 
-    void print(ostream& out) const {
+        if (this->isEmpty() && other.isEmpty())
+            return true;
+        else if (this->isEmpty() || other.isEmpty())
+            return false;
 
-        for (Pair<K, V> p : this->container) {
-            out << p.getKey() << " " << p.getValue() << endl;
+        int finalCount = 0;
+
+        for (Pair<K, V>& elem : this->elements) {
+            if (other.contains(elem.getKey())) {
+                if (other.cardinalityElement(elem) == this->cardinalityElement(elem))
+                    finalCount++;
+            }
         }
 
-        out << endl;
+        if (finalCount == this->elements.size())
+            return true;
+
+        return false;
     }
 };
-
-template<class K, class V>
-ostream& operator<<(ostream& out, const Map<K, V>& m1) {
-
-    m1.print(out);
-    return out;
-
-}
-
 
 
 int main() {
 
-    Map<int, int> m1;
 
-    m1.add(1, 10);
-    m1.add(2, 20);
-    m1.add(3, 30);
+    Map<int, string> m1;
+    Map<int, string> m2;
+    Map<int, string> m3;
 
-    // Check dell' effettiva modifica
-    m1.add(1, 55);
+    m1.insert(1, "Ciao");
+    m1.insert(69, "Yessir");
+    m1.insert(1, "Sovrascritto");
+    m1.remove(1);
 
-    cout << m1;
+    m2.insert(1, "Ciao");
+    m2.insert(69, "Yessir");
+    m2.insert(1, "Sovrascritto");
+    m2.remove(1);
+
+    m3.insert(21, "Loli");
 
 
+
+    m1.print();
+
+    cout << m1.operator==(m2) << endl;
+    cout << m1.operator==(m3) << endl;
+    cout << m2.operator==(m3) << endl;
+
+    return 0;
 }
