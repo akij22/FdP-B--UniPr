@@ -28,7 +28,7 @@ public:
         this->elements = newArray;
     }
 
-    void add(const T value) {
+    void add(const T& value) {
         if (this->pos == this->dim - 1)
             this->enLarge();
 
@@ -90,7 +90,7 @@ public:
         return finalM;
     }
 
-    void print() {
+    void print() const{
         for (int i = 0; i < this->pos; i++) {
             cout << this->elements[i] << " ";
         }
@@ -114,7 +114,7 @@ public:
 
 
     // OVERLOADING OPERATORE DI ASSEGNAMENTO
-    Multiset& operator=(const Multiset<T>& other) {
+    const Multiset& operator=(const Multiset<T>& other) {
         this->dim = other.dim;
         this->pos = other.pos;
 
