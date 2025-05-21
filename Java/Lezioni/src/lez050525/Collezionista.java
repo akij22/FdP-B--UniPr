@@ -38,7 +38,7 @@ public class Collezionista {
 	public void scambia(Collezionista other, Figurina figthis, Figurina figother) throws CollezionistaException {
 		
 		if(!this.album.contains(figthis) || !other.album.contains(figother)) {
-			throw new CollezionistaException("Figurina non appartenente al rispettivo propritario!");
+			throw new CollezionistaException("Figurina non appartenente al rispettivo proprietario!");
 		}
 		
 		

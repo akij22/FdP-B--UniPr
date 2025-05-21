@@ -21,6 +21,20 @@ public class Album implements Iterable<Figurina>{
 		this.figs = new HashSet<Figurina>();
 	}
 	
+	int getNumberFigSportive() {
+		if (this.figs.isEmpty())
+			return 0;
+		
+		int finalCount = 0;
+		
+		for (Figurina f : this.figs) {
+			if (f instanceof FigurinaSportiva)
+				finalCount++;
+		}
+		
+		return finalCount;
+	}
+	
 	
 	public void add(Figurina f) {
 		
@@ -29,13 +43,7 @@ public class Album implements Iterable<Figurina>{
 		
 		else if(f instanceof FigurinaSportiva) {
 			
-			int countFigSport = 0;
-			
-			for(Figurina ff : this.figs) {
-				if (ff instanceof FigurinaSportiva)
-					countFigSport++;
-				
-			}
+			int countFigSport = this.getNumberFigSportive();
 			
 			if (countFigSport == 100)
 				throw new IllegalArgumentException();
