@@ -2,7 +2,7 @@ package it.unipr.esamiestudenti;
 import java.util.*;
 
 
-public class AppelloEsame implements Comparable<AppelloEsame>{
+public class AppelloEsame implements Comparable<AppelloEsame> {
 
 	private String nome;
 	private int annoAccademico;
