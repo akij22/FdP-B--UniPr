@@ -1,6 +1,6 @@
 package it.unipr.contest;
 
-public class ContestException extends Exception{
+public class ContestException extends Exception {
 	
 	
 	public ContestException() {
