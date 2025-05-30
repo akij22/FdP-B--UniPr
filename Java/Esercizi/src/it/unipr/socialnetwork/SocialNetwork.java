@@ -1,7 +1,7 @@
 package it.unipr.socialnetwork;
 import java.util.*;
 
-public class SocialNetwork {
+public class SocialNetwork implements Iterable<User> {
 	
 	private String nome;
 	
@@ -18,6 +18,11 @@ public class SocialNetwork {
 		if (this.iscritti.contains(other)) throw new SocialNetworkException();
 		
 		this.iscritti.add(other);
+	}
+	
+	
+	public Iterator<User> iterator() {
+		return this.iscritti.iterator();
 	}
 	
 	

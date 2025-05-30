@@ -14,6 +14,8 @@ public class Partito implements Eleggibile, Cloneable {
 		this.voti = 0;
 	}
 	
+	
+	
 	private Partito (String nome, int voti) {
 		this.nome = nome;
 		
@@ -22,6 +24,9 @@ public class Partito implements Eleggibile, Cloneable {
 		
 		this.voti = voti;
 	}
+	
+	
+	
 	
 	public String getNome() {
 		return this.nome;
@@ -58,8 +63,8 @@ public class Partito implements Eleggibile, Cloneable {
 		return Objects.hash(nome, voti);
 	}
 	
-	
-	public Partito clone() {
+	@Override
+	public Object clone() {
 		return new Partito(this.nome, this.voti);
 	}
 	

@@ -14,7 +14,10 @@ public class Coalizione implements Eleggibile {
 		this.partiti = new HashSet<Partito>();
 		
 		for(int i = 0; i < arrayPartiti.length; i++) {
-			this.partiti.add(arrayPartiti[i]);
+			
+			if (!this.partiti.contains(arrayPartiti[i])) {
+				this.partiti.add(arrayPartiti[i]);
+			}
 		}
 	}
 	

@@ -6,7 +6,7 @@ public class AppelloEsame implements Comparable<AppelloEsame> {
 
 	private String nome;
 	private int annoAccademico;
-	private Vector<Immatricolabile> studenti;
+	private Set<Immatricolabile> studenti;
 	
 	public AppelloEsame(String nome, int annoAccademico) {
 	
@@ -17,7 +17,7 @@ public class AppelloEsame implements Comparable<AppelloEsame> {
 		this.annoAccademico = annoAccademico;
 		
 		
-		this.studenti = new Vector<Immatricolabile>();
+		this.studenti = new HashSet<Immatricolabile>();
 	}
 	
 	public boolean isEmpty() {
@@ -77,6 +77,7 @@ public class AppelloEsame implements Comparable<AppelloEsame> {
 			if (this.getNumberOfStudentiLavoratori() == 50)
 
 				throw new AppelloEsameException("E' stato raggiunto il massimo numero di student lavoratori per questo esame!");
+			
 			else this.studenti.add(other);
 		}
 	}
