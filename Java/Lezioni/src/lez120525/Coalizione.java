@@ -2,7 +2,7 @@ package lez120525;
 
 import java.util.*;
 
-public class Coalizione implements Eleggibile{
+public class Coalizione implements Eleggibile {
 	
 	private final String nome;
 	private final Set<Partito> partiti;

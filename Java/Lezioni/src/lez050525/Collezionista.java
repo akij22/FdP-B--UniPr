@@ -44,10 +44,11 @@ public class Collezionista {
 		
 		// Parte di scambio delle due figurine tra i due collezionisti
 		this.album.remove(figthis);
-		other.album.add(figother);
+		other.album.remove(figother);
 		
 		this.album.add(figother);
 		other.album.add(figthis);
+		
 		
 	}
 	

@@ -1,6 +1,6 @@
 package lez050525;
 
-public class FigurinaStorica extends Figurina{
+public class FigurinaStorica extends Figurina {
 
 	public FigurinaStorica(int id) {
 		
