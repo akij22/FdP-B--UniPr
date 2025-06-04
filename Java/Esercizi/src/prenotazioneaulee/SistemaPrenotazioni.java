@@ -1,7 +1,7 @@
 package prenotazioneaulee;
 import java.util.*;
 
-public class SistemaPrenotazioni implements Iterable<Prenotazione> {
+public class SistemaPrenotazioni implements Iterable<Prenotazione>, Comparable<SistemaPrenotazioni> {
 
 	private Vector<Prenotazione> prenotazioni;
 	
@@ -40,5 +40,9 @@ public class SistemaPrenotazioni implements Iterable<Prenotazione> {
 	
 	public Iterator<Prenotazione> iterator(){
 		return this.prenotazioni.iterator();
+	}
+	
+	public int compareTo(SistemaPrenotazioni other) {
+		return Integer.compare(this.prenotazioni.size(), other.prenotazioni.size());
 	}
 }
