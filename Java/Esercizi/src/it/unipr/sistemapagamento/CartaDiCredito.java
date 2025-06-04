@@ -45,9 +45,7 @@ public class CartaDiCredito implements MetodoPagamento, Comparable<CartaDiCredit
 	}
 	
 	public int compareTo(CartaDiCredito other) {
-		if (this.saldo < other.saldo) return -1;
-		if (this.saldo > other.saldo) return 1;
-		return 0;
+		return Double.compare(this.saldo, other.saldo);
 	}
 	
 }

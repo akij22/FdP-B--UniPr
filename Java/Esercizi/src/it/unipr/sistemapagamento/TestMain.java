@@ -11,7 +11,10 @@ public class TestMain {
 		
 		p1.aggiungiPagamento(c1);
 		
-		p1.paga(c1, 10);
+		p1.paga(c1, 180);
+		
+		System.out.println(c1.verificaSaldo());
+		
 		p1.paga(c2, 1000);
 
 	}

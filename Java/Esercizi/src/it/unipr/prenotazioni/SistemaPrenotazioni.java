@@ -47,8 +47,10 @@ public class SistemaPrenotazioni implements Iterable<Prenotazione>{
 		Set<Prenotazione> finalSet = new HashSet<Prenotazione>();
 		
 		for (Prenotazione elem : this.prenotazioni) {
-			if (elem.getData().equals(data))
+			if(elem.getAula() instanceof AulaStandard && elem.getData().equals(data)) 
+				
 				finalSet.add(elem);
+			
 		}
 		
 		return finalSet;

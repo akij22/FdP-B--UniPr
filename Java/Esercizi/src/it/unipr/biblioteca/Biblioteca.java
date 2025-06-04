@@ -39,12 +39,7 @@ public class Biblioteca implements Comparable<Biblioteca> {
 	
 	public int compareTo(Biblioteca other) {
 		
-		if (this.disponibili.size() < other.disponibili.size()) return -1;
-		
-		if (this.disponibili.size() > other.disponibili.size()) return 1;
-		
-		
-		return 0;
+		return Integer.compare(this.disponibili.size(), other.disponibili.size());
 		
 		
 	}

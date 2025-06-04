@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Manager extends Impiegato implements Comparable<Manager>, Iterable<Impiegato> {
 	
-	public static double stipendio = 25.90;
+	private static double stipendio = 25.90;
 	
 	
 	private Set<ImpiegatoBase> team;
@@ -19,8 +19,12 @@ public class Manager extends Impiegato implements Comparable<Manager>, Iterable<
 	}
 	
 	
+	public static double getStipendio() {
+		return stipendio;
+	}
+	
 	public double getStipendioAnnuale() {
-		return this.getOreLavoroAnnue() * stipendio;
+		return this.getOreLavoroAnnue() * Manager.getStipendio();
 	}
 	
 	@Override
@@ -47,11 +51,7 @@ public class Manager extends Impiegato implements Comparable<Manager>, Iterable<
 	
 	
 	public int compareTo(Manager other) {
-		if (this.team.size() < other.team.size()) return -1;
-		
-		if (this.team.size() > other.team.size()) return 1;
-		
-		return 0;
+		return Integer.compare(this.team.size(), other.team.size());
 	}
 	
 	public Iterator<Impiegato> iterator() {

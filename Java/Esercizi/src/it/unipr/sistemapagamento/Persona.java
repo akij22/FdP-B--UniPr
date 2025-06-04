@@ -26,10 +26,12 @@ public class Persona {
 				if (elem.equals(m)) {
 					m.decrementa(importo);
 					System.out.println("Pagamento avvenuto con successo!");
+					return;
 				}
 			}
 		}
 		
+		System.out.println("Nessun metodo di pagamento corrispondente a quello inserito...");
 		return;
 	}
 	
