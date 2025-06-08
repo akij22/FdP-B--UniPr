@@ -47,13 +47,11 @@ public class PremiumUser implements User, Comparable<PremiumUser> {
 		
 		return this.username.equals(other.username);
 	}
-	
-	
+
+	@Override
 	public int compareTo(PremiumUser other) {
-		if (this.follow.size() < other.follow.size()) return -1;
 		
-		if (this.follow.size() > other.follow.size()) return 1;
-		
-		return 0;
+		return Integer.compare(this.follow.size(), other.follow.size());
 	}
+	
 }

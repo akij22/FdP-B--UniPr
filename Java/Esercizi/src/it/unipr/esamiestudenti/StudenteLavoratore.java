@@ -1,5 +1,7 @@
 package it.unipr.esamiestudenti;
 
+import java.util.Objects;
+
 public class StudenteLavoratore implements Immatricolabile {
 
 	private String matricola;
@@ -17,6 +19,11 @@ public class StudenteLavoratore implements Immatricolabile {
 		StudenteLavoratore other = (StudenteLavoratore) o;
 		
 		return this.matricola.equals(other.matricola) && this.nomeAzienda.equals(other.nomeAzienda);
+	}
+	
+	
+	public int hashCode() {
+		return Objects.hash(this.matricola, this.nomeAzienda);
 	}
 	
 	

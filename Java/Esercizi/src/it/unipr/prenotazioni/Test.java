@@ -19,7 +19,7 @@ public class Test {
 		// sp1.add(p2);
 		sp1.add(p3);
 		
-		Set<Prenotazione> finalHS = sp1.getAuleStandardPrenotateOn("12/02/2005");
+		Set<Aula> finalHS = sp1.getAuleStandardPrenotateOn("12/02/2005");
 		
 		// System.out.println(finalHS);
 		

@@ -95,11 +95,12 @@ public class AppelloEsame implements Comparable<AppelloEsame> {
 	
 	
 	public int compareTo(AppelloEsame other) {
-		if (this.getNumberOfStudentiLavoratori() < other.getNumberOfStudentiLavoratori()) return -1;
-		
-		if (this.getNumberOfStudentiLavoratori() > other.getNumberOfStudentiLavoratori()) return 1;
-		
-		return 0;
+		return Integer.compare(this.getNumberOfStudentiLavoratori(), other.getNumberOfStudentiLavoratori());
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.nome, this.annoAccademico, this.studenti);
 	}
 	
 	

@@ -39,23 +39,22 @@ public class SistemaPrenotazioni implements Iterable<Prenotazione>{
 	}
 	
 	
-	public Set<Prenotazione> getAuleStandardPrenotateOn(String data) {
+	public Set<Aula> getAuleStandardPrenotateOn(String data) {
 		
-		if(this.isEmpty())
-			return null;
+		Set<Aula> finalA = new HashSet<Aula>();
 		
-		Set<Prenotazione> finalSet = new HashSet<Prenotazione>();
+		if (this.prenotazioni.isEmpty()) return finalA;
 		
-		for (Prenotazione elem : this.prenotazioni) {
-			if(elem.getAula() instanceof AulaStandard && elem.getData().equals(data)) 
-				
-				finalSet.add(elem);
-			
+		for (Prenotazione p : this.prenotazioni) {
+			if (p.getAula() instanceof AulaStandard && p.getData().equals(data))
+				finalA.add(p.getAula());
 		}
 		
-		return finalSet;
+		return finalA;
+		
+		
+
 	}
-	
 	
 
 	@Override

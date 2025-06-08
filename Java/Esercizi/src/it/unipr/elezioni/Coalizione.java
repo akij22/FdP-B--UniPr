@@ -19,6 +19,10 @@ public class Coalizione implements Eleggibile {
 				this.partiti.add(arrayPartiti[i]);
 			}
 		}
+		
+		
+		
+		
 	}
 	
 	
