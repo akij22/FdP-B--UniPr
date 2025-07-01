@@ -24,7 +24,7 @@ public class Persona {
 		if (this.pagamenti.contains(m)) {
 			for(MetodoPagamento elem : this.pagamenti) {
 				if (elem.equals(m)) {
-					m.decrementa(importo);
+					elem.decrementa(importo);
 					System.out.println("Pagamento avvenuto con successo!");
 					return;
 				}
